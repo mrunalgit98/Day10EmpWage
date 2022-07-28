@@ -2,17 +2,20 @@ package com;
 
 import java.util.*;
 
-// uc 12 Refactor to have list of multiple companies to  manage Employee Wage .
+// uc 13 daily wage along with total wage
 
 public class EmpWage  {
     final int IS_PART_TIME = 1;
     final int IS_FULL_TIME = 2;
+
+    ArrayList<Integer> empDailyMonthlyTotalWage = new ArrayList<Integer>();
 
     public void computeEmpWage(CompanyEmpWage companyEmpWage) {
         int empHrs = 0;
         int totalWorkingDays = 0;
         int totalEmpHrs = 0;
         int totalEmpWage = 0;
+        int empDailyWage=0;
         while (totalWorkingDays < companyEmpWage.getNumOfWorkingDays() && totalEmpHrs <=  companyEmpWage.getMaxHoursPerMonth()) {
 
             int empCheck = (int) ((Math.random() * 10) % 3);
@@ -31,18 +34,22 @@ public class EmpWage  {
             }
             totalWorkingDays++;
             totalEmpHrs = totalEmpHrs + empHrs;
+            empDailyWage=empHrs*companyEmpWage.getEmpRatePerHour();
+            System.out.println("day "+ totalWorkingDays+"wage " + empDailyWage );
         }
-        companyEmpWage.setTotalEmpWage( totalEmpHrs * companyEmpWage.empRatePerHour );
+        totalEmpWage=(totalEmpHrs * companyEmpWage.getEmpRatePerHour());
+        empDailyMonthlyTotalWage.add(totalEmpWage);
+        companyEmpWage.setTotalEmpWage( totalEmpHrs );
         System.out.println(" Monthly Wage of " + companyEmpWage.getCompanyName() + " is " + companyEmpWage.getTotalEmpWage());
     }
     //Main Function
     public static void main(String[] args) {
         System.out.println("EMPLOYEE WAGE COMPUTATION");
         EmpWage emp = new EmpWage();
-        //ArrayList of Multiple Companies Wage
+
 
         ArrayList<CompanyEmpWage> company = new ArrayList<CompanyEmpWage>();
-        // assign value to object of Companyempwage
+
         company.add( new CompanyEmpWage("dMART", 40, 20, 100));
         emp.computeEmpWage(company.get(0));
         company.add( new CompanyEmpWage("Croma", 30, 22, 120));
