@@ -15,7 +15,7 @@ class CompanyEmpWage {
         this.maxHoursPerMonth = maxHoursPerMonth;
     }
 
-    public String getCompanyName(){  //GETTERS method to get variables
+    public String getCompanyName(){
         return company;
     }
     public int getEmpRatePerHour(){
